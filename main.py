@@ -9,7 +9,7 @@ import json
 from llama_index import Document
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -48,6 +48,12 @@ async def stream(query: Query):
     query_preamble= "Given the provided product details, recommend several products from the provided data, and describe them, that satisfies the following search query or question: " 
     prompt = query_preamble + query.content
     response = query_engine.query(prompt + ". Now output this data in a numbered list without including 'Product Name' and 'Description' keywords. Then summarize everything at the end.")
-    print(response)
-    return {"response": response}
+    
+    response = JSONResponse({"response": response})
+    response.headers["Access-Control-Allow-Origin"] = "https://build-a-blend-frontend.vercel.app"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    
+    return response
 
