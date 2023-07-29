@@ -44,3 +44,14 @@ async def stream(query: Query):
 @app.get("/")
 async def main():
     return {"message": "Hello World"}
+
+@app.get("/test")
+async def test():
+    llm = OpenAI(temperature=0, model="gpt-3.5-turbo", max_tokens=1000)
+    service_context = ServiceContext.from_defaults(llm=llm, chunk_size=51200)
+
+    documents = SimpleDirectoryReader('data2').load_data()
+    index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+    query_engine = index.as_query_engine(similarity_top_k=10)
+    response = query_engine.query("what is this about?")
+    return {"response": response}
