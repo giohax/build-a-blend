@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "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"
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
