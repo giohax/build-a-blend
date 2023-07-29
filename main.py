@@ -10,7 +10,6 @@ from llama_index import Document
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse, StreamingResponse
-from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.cors import CORSMiddleware 
 
 os.environ['OPENAI_API_KEY'] = "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"
