@@ -41,7 +41,7 @@ query_engine = index.as_query_engine(
 )
 
 
-@app.post("https://build-a-blend-frontend.vercel.app/stream")
+@app.post("https://build-a-bear-backend-6c980c5e3e3e.herokuapp.com/stream")
 async def stream(query: Query):
     query_preamble= "Given the provided product details, recommend several products from the provided data, and describe them, that satisfies the following search query or question: " 
     prompt = query_preamble + query.content
