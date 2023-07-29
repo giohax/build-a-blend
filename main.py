@@ -1,16 +1,11 @@
 
-from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, SimpleKeywordTableIndex, VectorStoreIndex, KnowledgeGraphIndex, StorageContext
+from llama_index import ServiceContext, SimpleDirectoryReader, VectorStoreIndex
 import os
 import openai
 from llama_index.llms import OpenAI
-from pathlib import Path
-from llama_index import download_loader
-import json
-from llama_index import Document
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse, StreamingResponse
-from starlette.middleware.cors import CORSMiddleware 
+from fastapi.middleware.cors import CORSMiddleware
 
 os.environ['OPENAI_API_KEY'] = "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"
 openai.api_key = os.environ['OPENAI_API_KEY']
@@ -18,11 +13,9 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 
 app = FastAPI()
 
-
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://build-a-blend-frontend.vercel.app"], 
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -52,4 +45,4 @@ async def stream(query: Query):
 
 @app.get("/")
 async def main():
-    return {"response": "Hello World"}
+    return {"message": "Hello World"}
