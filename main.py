@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-os.environ['OPENAI_API_KEY'] = "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"
-openai.api_key = os.environ['OPENAI_API_KEY']
+os.environ['OPENAI_API_KEY'] = "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"
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
 app = FastAPI()
@@ -34,9 +34,7 @@ async def stream(query: Query):
 
     documents = SimpleDirectoryReader('data2').load_data()
     index = VectorStoreIndex.from_documents(documents, service_context=service_context)
-    query_engine = index.as_query_engine(
-    similarity_top_k=10
-)
+    query_engine = index.as_query_engine(similarity_top_k=10)
     query_preamble= "Given the provided product details, recommend several products from the provided data, and describe them, that satisfies the following search query or question: " 
     prompt = query_preamble + query.content
     response = query_engine.query(prompt + ". Now output this data in a numbered list without including 'Product Name' and 'Description' keywords. Then summarize everything at the end.")
