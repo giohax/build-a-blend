@@ -19,9 +19,11 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 
 app = FastAPI()
 
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (change this in production)
+    allow_origins=["https://build-a-blend-frontend.vercel.app"],  # Allow all origins (change this in production)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
