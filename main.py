@@ -23,7 +23,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://build-a-blend-frontend.vercel.app"],  # Allow all origins (change this in production)
+    allow_origins=["*"],  # Allow all origins (change this in production)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
@@ -49,11 +49,5 @@ async def stream(query: Query):
     prompt = query_preamble + query.content
     response = query_engine.query(prompt + ". Now output this data in a numbered list without including 'Product Name' and 'Description' keywords. Then summarize everything at the end.")
     
-    response = JSONResponse({"response": response})
-    response.headers["Access-Control-Allow-Origin"] = "https://build-a-blend-frontend.vercel.app"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    
-    return response
+    return {"response": response}
 
