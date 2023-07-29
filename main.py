@@ -26,7 +26,8 @@ app.add_middleware(
     allow_origins=["https://build-a-blend-frontend.vercel.app/" , "http://build-a-blend-frontend.vercel.app/"],  # Allow all origins (change this in production)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
+    allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 class Query(BaseModel):
