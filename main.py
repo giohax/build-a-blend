@@ -25,7 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://build-a-blend-frontend.vercel.app/" , "http://build-a-blend-frontend.vercel.app/"],  # Allow all origins (change this in production)
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
+    allow_methods=["POST"],
     allow_headers=["*"],
     expose_headers=["*"]
 )
