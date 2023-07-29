@@ -50,3 +50,6 @@ async def stream(query: Query):
     
     return {"response": response}
 
+@app.get("/")
+async def main():
+    return {"response": "Hello World"}
